@@ -20,9 +20,6 @@ def apply_template!
       /.env.*local
     IGNORE
 
-    create_database
-    run_with_clean_bundler_env "bin/setup"
-
     binstubs = %w[brakeman bundler sidekiq]
     run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
   end
