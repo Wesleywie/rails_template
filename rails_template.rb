@@ -5,9 +5,11 @@ def apply_template!
   assert_valid_options
   assert_postgresql
 
-  template "README.md.tt", force: true
   template "Gemfile.tt", force: true
-  template "ruby-version", ".ruby-version", force: true
+
+  template "README.md.tt", force: true
+  remove_file "README.rdoc"
+  template "ruby-version.tt", ".ruby-version", force: true
 
   after_bundle do
     append_to_file ".gitignore", <<~IGNORE
