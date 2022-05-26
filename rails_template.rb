@@ -22,6 +22,11 @@ def apply_template!
 
     binstubs = %w[brakeman bundler sidekiq]
     run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
+
+    EDITOR="nano" rails credentials:edit -e development
+    EDITOR="nano" rails credentials:edit -e test
+    EDITOR="nano" rails credentials:edit -e staging
+    EDITOR="nano" rails credentials:edit -e production
   end
 end
 
