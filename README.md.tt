@@ -16,8 +16,6 @@ This project requires:
 On a Mac, you can obtain all of the above packages using [Homebrew](https://brew.sh/).
 
 ## Getting started
-* run `gem install bundler`
-* run `bundle install`
 * run `rails s` to start server.
 * run 'rails c' to start console
 
