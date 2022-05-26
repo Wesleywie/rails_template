@@ -1,0 +1,26 @@
+# Logfile created on 2022-05-26 08:29:18 +0200 by logger.rb/v1.4.3
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] WARN : Detected untested Rails version 7.0.3
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Starting the New Relic agent version 7.2.0 in "development" environment.
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "development" section of your newrelic.yml.
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] WARN : No configuration file found. Working directory = /Users/wesleywienand/Developer_Private/rails_template
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] WARN : Looked in these locations (based on defaults): /Users/wesleywienand/Developer_Private/rails_template/config/newrelic.yml, /Users/wesleywienand/Developer_Private/rails_template/newrelic.yml, /Users/wesleywienand/Developer_Private/rails_template/config/newrelic.yml.erb, /Users/wesleywienand/Developer_Private/rails_template/newrelic.yml.erb, /Users/wesleywienand/Developer_Private/rails_template/config/newrelic.yml, /Users/wesleywienand/Developer_Private/rails_template/newrelic.yml, /Users/wesleywienand/Developer_Private/rails_template/config/newrelic.yml.erb, /Users/wesleywienand/Developer_Private/rails_template/newrelic.yml.erb, /Users/wesleywienand/.newrelic/newrelic.yml, /Users/wesleywienand/newrelic.yml, /Users/wesleywienand/.newrelic/newrelic.yml.erb, /Users/wesleywienand/newrelic.yml.erb
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Environment: development
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : No known dispatcher detected.
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Application: development
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] WARN : No license key found. This often means your newrelic.yml file was not found, or it lacks a section for the running environment, 'development'. You may also want to try linting your newrelic.yml to ensure it is valid YML.
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] WARN : Detected untested Rails version 7.0.3
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing ActiveJob instrumentation
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing notifications based Active Record instrumentation
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing ActiveStorage 5 instrumentation
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing Net:HTTP Wrappers
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing New Relic supported NetHTTP instrumentation using Prepend
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing New Relic supported Rack instrumentation using Prepend
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing New Relic supported URLMap instrumentation using Prepend
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing Rails 3+ middleware instrumentation
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing Redis Instrumentation
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing New Relic supported Redis instrumentation using Prepend
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing Sidekiq instrumentation
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing notifications based Action Cable instrumentation
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing notifications based Action Controller instrumentation
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Installing notification based Action View instrumentation
+[2022-05-26 08:29:18 +0200 Wesleys-MacBook-Pro.local (82388)] INFO : Finished instrumentation

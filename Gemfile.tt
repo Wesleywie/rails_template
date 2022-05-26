@@ -1,0 +1,45 @@
+source "https://rubygems.org"
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
+ruby "<%= RUBY_VERSION %>"
+
+gem "sidekiq", '< 6' # Jobs
+gem 'sidekiq-failures', '~> 1.0.0'
+gem 'sidekiq-scheduler', '~> 3.0.1'
+gem "active_model_serializers", "~> 0.10.12" # Serializers
+gem "rollbar", "~> 3.2" # Error Reporting
+gem "rack-attack", "~> 6.5" # API Protection
+gem "brakeman", "~> 5.0" # Security Checks
+gem "newrelic_rpm", "~> 7.0" # Performance monitoring
+gem "devise", "~> 4.8" # User Authentication
+gem "doorkeeper", "~> 5.5" # User API authentication
+gem "doorkeeper-jwt", "~> 0.4.0"
+gem "active_hash", "~> 3.1.0"
+gem "rack-cors", "~> 1.1.1"
+gem 'awesome_print', :require => 'ap'
+gem "faraday", "~> 2.3.0"
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'dotenv-rails'
+end
+
+group :development do
+  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
+  gem "spring"
+end
+
+group :test do
+  # Test Driven Development suite
+  gem 'database_cleaner-active_record', "~> 2.0.1"
+  gem 'rspec-rails', "~> 5.1.2"
+  gem 'factory_bot_rails', "~> 6.2.0"
+  gem 'simplecov', require: false
+  gem 'shoulda', "~> 4.0.0"
+  gem 'pundit-matchers', '~> 1.7.0'
+  gem 'mock_redis', '~> 0.29.0'
+  gem 'rspec-sidekiq', '~> 3.1'
+  gem 'rails-controller-testing', '~> 1.0.5'
+  gem "webmock", '~> 3.13.0'
+end
