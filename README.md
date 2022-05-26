@@ -1,24 +1,31 @@
-# README
+# rails-api-template
+## Description
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the application template for a new rails 7 project with standard gem set.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+This template currently works with:
 
-* System dependencies
+* Rails 7.0.x
+* Bundler 2.x
+* PostgreSQL
+## Usage
 
-* Configuration
+To generate a Rails application using this template, pass the `-m` option to `rails new`, like this:
 
-* Database creation
+Edit the XXXXX with your project name.
 
-* Database initialization
+```
+rails new XXXXX\
+  -d postgresql\
+  -- api\
+  -m https://raw.githubusercontent.com/Wesleywie/rails_template/main/rails_template.rb
+```
+## What does it do?
 
-* How to run the test suite
+The template will perform the following steps:
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. Generate your application files and directories
+2. Create the development and test databases
+3. Add base gems
