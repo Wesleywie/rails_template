@@ -1,3 +1,6 @@
+require 'fileutils'
+require 'shellwords'
+
 RAILS_REQUIREMENT = "~> 7.0.0".freeze
 
 def apply_template!
@@ -11,23 +14,95 @@ def apply_template!
   template "README.md.tt", force: true
   remove_file "README.rdoc"
   template "ruby-version.tt", ".ruby-version", force: true
+  template ".env.example.tt", force: true
 
   after_bundle do
     append_to_file ".gitignore", <<~IGNORE
+    /config/credentials/development.key
+    /config/credentials/staging.key
+    /config/credentials/test.key
+    /config/credentials/production.key
 
-      # Ignore application config.
-      /.env.development
-      /.env.*local
+    # Postgres stuff
+    dump.rdb
+    coverage/
+
+    # Environment Files
+    .env
+    .env.production
+
+    # IDE Ignores
+    .idea
+    *.DS_Store
+    .generators
+    .rakeTasks
     IGNORE
 
     binstubs = %w[brakeman bundler sidekiq]
     run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
-
-    EDITOR="nano" rails credentials:edit -e development
-    EDITOR="nano" rails credentials:edit -e test
-    EDITOR="nano" rails credentials:edit -e staging
-    EDITOR="nano" rails credentials:edit -e production
+    fix_files
   end
+end
+
+def fix_files
+  if Dir.exist?("test")
+    FileUtils.rm_rf("test")     
+  end
+
+  if Dir.exist?("config")
+    FileUtils.rm_rf("config/database.yml")
+    create_database_yaml
+  end
+
+  FileUtils.mkdir_p("spec")
+  FileUtils.mkdir_p("spec/models")
+  FileUtils.mkdir_p("spec/policy")
+  FileUtils.mkdir_p("spec/requests")
+  FileUtils.mkdir_p("spec/support")
+end
+
+def create_database_yaml
+  FileUtils.touch('database.yml')
+
+  append_to_file "database.yml", <<~EOF
+    development:
+    adapter: <%= ENV['DATABASE_ADAPTER'] %>
+    host: <%= ENV['DATABASE_HOST'] %>
+    database: <%= "#{ENV['DATABASE_NAME']}_development" %>
+    username: <%= ENV['DATABASE_USERNAME'] %>
+    password: <%= ENV['DATABASE_PASSWORD'] %>
+    encoding: utf8
+    pool: 5
+    timeout: 10_000
+  test:
+    adapter: <%= ENV['DATABASE_ADAPTER'] %>
+    host: <%= ENV['DATABASE_HOST'] %>
+    database: <%= "#{ENV['DATABASE_NAME']}_test" %>
+    username: <%= ENV['DATABASE_USERNAME'] %>
+    password: <%= ENV['DATABASE_PASSWORD'] %>
+    encoding: utf8
+    pool: 5
+    timeout: 10_000
+  staging:
+    adapter: <%= ENV['DATABASE_ADAPTER'] %>
+    host: <%= ENV['DATABASE_HOST'] %>
+    database: <%= "#{ENV['DATABASE_NAME']}_staging" %>
+    username: <%= ENV['DATABASE_USERNAME'] %>
+    password: <%= ENV['DATABASE_PASSWORD'] %>
+    encoding: utf8
+    pool: 5
+    timeout: 10_000
+  production:
+    adapter: <%= ENV['DATABASE_ADAPTER'] %>
+    host: <%= ENV['DATABASE_HOST'] %>
+    database: <%= "#{ENV['DATABASE_NAME']}_production" %>
+    username: <%= ENV['DATABASE_USERNAME'] %>
+    password: <%= ENV['DATABASE_PASSWORD'] %>
+    encoding: utf8
+    pool: 5
+  EOF
+
+  FileUtils.mv 'database.yml', "config"
 end
 
 def assert_minimum_rails_version
@@ -125,11 +200,6 @@ def run_with_clean_bundler_env(cmd)
     puts "Command failed, exiting: #{cmd}"
     exit(1)
   end
-end
-
-def create_database
-  return if Dir["db/migrate/**/*.rb"].any?
-  run_with_clean_bundler_env "bin/rails db:create"
 end
 
 apply_template!

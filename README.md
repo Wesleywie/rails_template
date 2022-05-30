@@ -1,7 +1,12 @@
 # rails-api-template
 ## Description
 
-This is the application template for a new rails 7 project with standard gem set.
+This is the application template for a new rails 7 project with:
+* Standard Gems/Packages
+* Rspec configuration
+* Configured Read.me 
+* Configured Database.yml
+* Example ENV required to run with Database
 
 ## Requirements
 
@@ -22,10 +27,16 @@ rails new XXXXX\
   -- api\
   -m https://raw.githubusercontent.com/Wesleywie/rails_template/main/rails_template.rb
 ```
+
+## Set up commands
+* `rspec init`
+* `EDITOR="nano" rails credentials:edit -e development`
+* `EDITOR="nano" rails credentials:edit -e staging`
+* `EDITOR="nano" rails credentials:edit -e production`
+
 ## What does it do?
 
 The template will perform the following steps:
 
 1. Generate your application files and directories
-2. Create the development and test databases
-3. Add base gems
+2. Add base gems
