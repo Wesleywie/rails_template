@@ -51,8 +51,24 @@ def fix_files
 
   if Dir.exist?("config")
     FileUtils.rm_rf("config/database.yml")
+    # FileUtils.rm_rf("config/credentials.yml.enc")
+    # FileUtils.rm_rf("config/master.key")
     create_database_yaml
   end
+
+  # if Dir.exist?("config/environments")
+  #   FileUtils.rm_rf("config/environments/production")     
+  #   FileUtils.rm_rf("config/environments/development")  
+
+  #   template "development.rb.tt", force: true
+  #   template "production.rb.tt", force: true
+  #   template "staging.rb.tt", force: true
+
+  #   FileUtils.mv 'development.rb', "config/environments"
+  #   FileUtils.mv 'production.rb', "config/environments"
+  #   FileUtils.mv 'staging.rb', "config/environments"
+  # end
+
 
   FileUtils.mkdir_p("spec")
   FileUtils.mkdir_p("spec/models")

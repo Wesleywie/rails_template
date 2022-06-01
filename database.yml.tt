@@ -1,0 +1,36 @@
+development:
+  adapter: <%= ENV['DATABASE_ADAPTER'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  database: <%= "#{ENV['DATABASE_NAME']}_development" %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  encoding: utf8
+  pool: 5
+  timeout: 10_000
+test:
+  adapter: <%= ENV['DATABASE_ADAPTER'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  database: <%= "#{ENV['DATABASE_NAME']}_test" %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  encoding: utf8
+  pool: 5
+  timeout: 10_000
+staging:
+  adapter: <%= ENV['DATABASE_ADAPTER'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  database: <%= "#{ENV['DATABASE_NAME']}_staging" %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  encoding: utf8
+  pool: 5
+  timeout: 10_000
+production:
+  adapter: <%= ENV['DATABASE_ADAPTER'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  database: <%= "#{ENV['DATABASE_NAME']}_production" %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  encoding: utf8
+  pool: 5
+  timeout: 10_000
