@@ -1,0 +1,5 @@
+module RequestMacros
+  def authenticate_user
+    @application = FactoryBot.create(:application)
+  end
+end

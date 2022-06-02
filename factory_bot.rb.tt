@@ -1,0 +1,7 @@
+FactoryBot.define do
+  factory :application, class: Doorkeeper::Application do
+    name { 'XXXXX' }
+    redirect_uri { 'https://localhost:3000' }
+    scopes { "read write" }
+  end
+end

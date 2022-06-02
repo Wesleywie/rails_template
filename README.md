@@ -29,10 +29,16 @@ rails new XXXXX\
 ```
 
 ## Set up commands
-* `rspec init`
+* `rails db:crate`
 * `EDITOR="nano" rails credentials:edit -e development`
 * `EDITOR="nano" rails credentials:edit -e staging`
 * `EDITOR="nano" rails credentials:edit -e production`
+
+## Getting started
+* `rails s for server`
+* `rails c for console`
+* `rspec for unit test`
+* `brakeman to run brakeman
 
 ## What does it do?
 

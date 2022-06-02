@@ -14,7 +14,8 @@ def apply_template!
   template "README.md.tt", force: true
   remove_file "README.rdoc"
   template "ruby-version.tt", ".ruby-version", force: true
-  template ".env.example.tt", force: true
+  template "env.example.tt", ".env.example" ,force: true
+  template "env.tt", ".env" ,force: true
 
   after_bundle do
     append_to_file ".gitignore", <<~IGNORE
@@ -51,37 +52,61 @@ def fix_files
 
   if Dir.exist?("config")
     FileUtils.rm_rf("config/database.yml")
-    # FileUtils.rm_rf("config/credentials.yml.enc")
-    # FileUtils.rm_rf("config/master.key")
+    FileUtils.rm_rf("config/credentials.yml.enc")
+    FileUtils.rm_rf("config/master.key")
     create_database_yaml
   end
 
-  # if Dir.exist?("config/environments")
-  #   FileUtils.rm_rf("config/environments/production")     
-  #   FileUtils.rm_rf("config/environments/development")  
+  if Dir.exist?("config/environments")
+    FileUtils.rm_rf("config/environments/production")     
+    FileUtils.rm_rf("config/environments/development")  
 
-  #   template "development.rb.tt", force: true
-  #   template "production.rb.tt", force: true
-  #   template "staging.rb.tt", force: true
+    template "development.rb.tt", force: true
+    template "production.rb.tt", force: true
+    template "staging.rb.tt", force: true
 
-  #   FileUtils.mv 'development.rb', "config/environments"
-  #   FileUtils.mv 'production.rb', "config/environments"
-  #   FileUtils.mv 'staging.rb', "config/environments"
-  # end
-
+    FileUtils.mv 'development.rb', "config/environments"
+    FileUtils.mv 'production.rb', "config/environments"
+    FileUtils.mv 'staging.rb', "config/environments"
+  end
 
   FileUtils.mkdir_p("spec")
   FileUtils.mkdir_p("spec/models")
   FileUtils.mkdir_p("spec/policy")
   FileUtils.mkdir_p("spec/requests")
   FileUtils.mkdir_p("spec/support")
+  create_support_files
+end
+
+def create_support_files
+  template "rails_helper.rb.tt", force: true
+  template "spec_helper.rb.tt", force: true
+  template "factory_bot.rb.tt", force: true
+  template "request_macros.rb.tt", force: true
+  template "controller_macros.rb.tt", force: true
+  template "model_macros.rb.tt", force: true
+  template "policy_macros.rb.tt", force: true
+  template "serializer_macros.rb.tt", force: true
+  template "view_macros.rb.tt", force: true
+  template "worker_macros.rb.tt", force: true
+
+  FileUtils.mv 'rails_helper.rb', "spec"
+  FileUtils.mv 'spec_helper.rb', "spec"
+  FileUtils.mv 'factory_bot.rb', "spec/support"
+  FileUtils.mv 'request_macros.rb', "spec/support"
+  FileUtils.mv 'controller_macros.rb', "spec/support"
+  FileUtils.mv 'model_macros.rb', "spec/support"
+  FileUtils.mv 'policy_macros.rb', "spec/support"
+  FileUtils.mv 'serializer_macros.rb', "spec/support"
+  FileUtils.mv 'view_macros.rb', "spec/support"
+  FileUtils.mv 'worker_macros.rb', "spec/support"
 end
 
 def create_database_yaml
   FileUtils.touch('database.yml')
 
   append_to_file "database.yml", <<~EOF
-    development:
+  development:
     adapter: <%= ENV['DATABASE_ADAPTER'] %>
     host: <%= ENV['DATABASE_HOST'] %>
     database: <%= "#{ENV['DATABASE_NAME']}_development" %>
