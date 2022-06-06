@@ -10,7 +10,6 @@ def apply_template!
   add_template_repository_to_source_path
 
   template "Gemfile.tt", force: true
-
   template "README.md.tt", force: true
   remove_file "README.rdoc"
   template "ruby-version.tt", ".ruby-version", force: true
@@ -41,6 +40,8 @@ def apply_template!
 
     binstubs = %w[brakeman bundler sidekiq]
     run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
+    setup_doorkeeper_oauth
+    setup_devise
     fix_files
   end
 end
@@ -69,6 +70,10 @@ def fix_files
     FileUtils.mv 'production.rb', "config/environments"
     FileUtils.mv 'staging.rb', "config/environments"
   end
+
+  FileUtils.rm_rf("config/initializers/doorkeeper") 
+  template "doorkeeper.rb.tt", force: true 
+  FileUtils.mv 'doorkeeper.rb', "config/initializers"
 
   FileUtils.mkdir_p("spec")
   FileUtils.mkdir_p("spec/models")
@@ -100,6 +105,19 @@ def create_support_files
   FileUtils.mv 'serializer_macros.rb', "spec/support"
   FileUtils.mv 'view_macros.rb', "spec/support"
   FileUtils.mv 'worker_macros.rb', "spec/support"
+end
+
+def setup_doorkeeper_oauth
+  run_with_clean_bundler_env "bundle exec rails generate doorkeeper:install"
+  run_with_clean_bundler_env "bundle exec rails generate doorkeeper:migration"
+end
+
+def setup_devise
+  run_with_clean_bundler_env "bundle exec rails generate devise:install"
+  run_with_clean_bundler_env "bundle exec rails generate devise users"
+  run_with_clean_bundler_env "bundle exec rails generate devise:views"
+  run_with_clean_bundler_env "bundle exec rails generate devise:views users"
+  run_with_clean_bundler_env "bundle exec rails generate devise:controllers users"
 end
 
 def create_database_yaml
@@ -164,7 +182,7 @@ def assert_valid_options
     skip_git: false,
     skip_system_test: false,
     skip_test: false,
-    skip_test_unit: false,
+    skip_test_unit: true,
     edge: false
   }
   valid_options.each do |key, expected|

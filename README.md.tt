@@ -16,12 +16,13 @@ This project requires:
 On a Mac, you can obtain all of the above packages using [Homebrew](https://brew.sh/).
 
 ## Set up commands
-* `rails db:crate`
+* `rails db:create db:migrate`
 * `EDITOR="nano" rails credentials:edit -e development`
 * `EDITOR="nano" rails credentials:edit -e staging`
 * `EDITOR="nano" rails credentials:edit -e production`
 
 ## Getting started
+* Set up .env
 * `rails s for server`
 * `rails c for console`
 * `rspec for unit test`

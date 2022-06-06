@@ -6,7 +6,12 @@ This is the application template for a new rails 7 project with:
 * Rspec configuration
 * Configured Read.me 
 * Configured Database.yml
-* Example ENV required to run with Database
+* Ruby Version
+* Enviroments
+* GitIgnore
+* Doorkeeper initialisation
+* Devise set up with default user
+* Example ENV required to run with Database && ENV
 
 ## Requirements
 
@@ -29,12 +34,13 @@ rails new XXXXX\
 ```
 
 ## Set up commands
-* `rails db:crate`
+* `rails db:create db:migrate`
 * `EDITOR="nano" rails credentials:edit -e development`
 * `EDITOR="nano" rails credentials:edit -e staging`
 * `EDITOR="nano" rails credentials:edit -e production`
 
 ## Getting started
+* Set up .env
 * `rails s for server`
 * `rails c for console`
 * `rspec for unit test`
@@ -44,5 +50,6 @@ rails new XXXXX\
 
 The template will perform the following steps:
 
-1. Generate your application files and directories
-2. Add base gems
+1. Generate your application files and directories.
+2. Add base gems.
+3. Configure most development files needed to build and deploy.
