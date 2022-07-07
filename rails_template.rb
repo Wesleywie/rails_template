@@ -41,7 +41,7 @@ def apply_template!
     binstubs = %w[brakeman bundler sidekiq]
     run_with_clean_bundler_env "bundle binstubs #{binstubs.join(' ')} --force"
     setup_doorkeeper_oauth
-    setup_devise
+    # setup_devise
     fix_files
   end
 end
